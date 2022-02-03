@@ -1,9 +1,11 @@
 import cv2
 import numpy as np
 
+# INITIALIZE CAM AND SETUP
 cap = cv2.VideoCapture(0)
 
 while cap.isOpened():
+
     ret,frame = cap.read()
     frame_copy = frame.copy()
     if ret :
@@ -38,10 +40,15 @@ while cap.isOpened():
 
         result = cv2.addWeighted(frame_copy, 0.25, frame, 1 - 0.25, 0)
 
-        cv2.imshow('result',result)
-
+        # ORIGINAL FRAME
         cv2.imshow('frame',frame)
+
+        # FRAME WITH ANGLE GRID ON BACKGROUND
+        cv2.imshow('result', result)
+
+        # PRESS 'q' TO QUIT
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+
 cap.release()
 cv2.destroyAllWindows()
